@@ -44,13 +44,16 @@ def main():
 
     shortcut_found = False
     for shortcut in shortcuts:
-        for word in shortcut['desc'].split(' '):
-            calc_levenshtein_distance(query, word)
-            if calc_levenshtein_distance(query, word) > SIMILARITY_THRESHOLD:
-                print(shortcut['key'], ':', shortcut['desc'])
-                shortcut_found = True
-                break
-
+        query_d = 0
+        for query_word in query.split(' '):
+            qw_d = 0
+            for word in shortcut['desc'].split(' '):
+                d = calc_levenshtein_distance(query_word, word)
+                qw_d = max(qw_d, d)
+            query_d += qw_d
+        if query_d / len(query.split(' '))> SIMILARITY_THRESHOLD:
+            shortcut_found = True
+            print(shortcut['key'], ':', shortcut['desc'])
     if not shortcut_found:
         print('단축키가 검색되지 않았습니다.')
 
