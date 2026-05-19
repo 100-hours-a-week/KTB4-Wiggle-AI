@@ -6,14 +6,20 @@ class PostBase(BaseModel):
     text: str
     author: str
 
-class PostUpdate(PostBase):
+class PostUpdate(BaseModel):
     id: int
+    title: str
+    text: str
+    author: str
     
-class PostResponse(PostBase):
+class PostResponse(BaseModel):
     id: int
+    title: str
+    text: str
+    author: str
     upload_time: str
 
-class PostGet(BaseModel):
+class PostRead(BaseModel):
     id: int
 
 class PostDelete(BaseModel):
@@ -26,9 +32,21 @@ class CommentBase(BaseModel):
     text: str
     author: str
 
-class CommentResponse(CommentBase):
+class CommentResponse(BaseModel):
     id: int
+    post_id: int
+    text: str
+    author: str
     upload_time: str
 
-class CommentUpdate(CommentBase):
+class CommentUpdate(BaseModel):
+    id: int
+    text: str
+    author: str
+    
+class CommentDelete(BaseModel):
+    id: int
+    author: str
+
+class CommentRead(BaseModel):
     id: int

@@ -20,11 +20,14 @@ def main():
                 rq = requests.patch(url=tc['url'], json=tc['data'])
             case "delete":
                 rq = requests.delete(url=tc['url'], json=tc['data'])
+            case "read":
+                rq = requests.get(url=tc['url'], json=tc['data'])
             case _:
                 continue
 
        
         print(rq, rq.content)
+        print()
     return
 
 if __name__ == "__main__":
