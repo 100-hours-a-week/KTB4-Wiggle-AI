@@ -1,0 +1,74 @@
+[
+    {
+        "Method": "create",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "title": "first testcase",
+            "text": "hello world",
+            "author": "wiggle"
+        }
+    },
+    {
+        "Method": "get",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "id": 1
+        }
+    },
+    {
+        "Method": "create",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "title": "second testcase",
+            "text": "hello hello world",
+            "author": "alex"
+        }
+    },
+    {
+        "Method": "create",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "title": "third testcase",
+            "text": "hello hello hello world",
+            "author": "kevin"
+        }
+    },
+    {
+        "Method": "update",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "id": 1,
+            "title": "This post is modified",
+            "text": "Modified",
+            "author": "wiggle"
+        }
+    },
+    {
+        "Method": "update",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "id": 1,
+            "title": "Invalid Update",
+            "text": "nono",
+            "author": "alex"
+        }
+    },
+    {
+        "Method": "delete",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "url": "http://127.0.0.1:8000/posts",
+            "id": 1,
+            "author": "alex"
+        }
+    },
+    {
+        "Method": "delete",
+        "url": "http://127.0.0.1:8000/posts",
+        "data": {
+            "url": "http://127.0.0.1:8000/posts",
+            "id": 2,
+            "author": "alex"
+        }
+    }
+]
