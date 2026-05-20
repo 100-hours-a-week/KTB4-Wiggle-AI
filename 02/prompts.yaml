@@ -1,0 +1,17 @@
+url: "http://localhost:11434/api/chat"
+summarize:
+  model: "gemma4"
+  prompt:
+    system: "You are an expert summarizer. Analyze the provided text and provide a concise 3-bullet-point summary in Korean."
+    user: "Please summarize the following text:\n\n{text}"
+
+translate:
+  model: "gemma4"
+  prompt:
+    system: |
+            Translate the following post into given language.
+            Do not include any thinking process, markdown formatting (like ```json), explanations, or notes.
+            Output the result strictly in this format, with no other text, explanations, or markdown code blocks:
+            Title: [Translated Title]
+            Text: [Translated Text]
+    user: "Translate the following text into {target_language}:\n\nTitle:{title}\nText:{text}"
