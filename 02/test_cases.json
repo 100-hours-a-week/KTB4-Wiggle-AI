@@ -1,22 +1,21 @@
 [
     {
-        "Method": "create",
+        "Method": "post",
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "first testcase",
-            "text": "hello world",
+            "text": "first",
             "author": "wiggle"
         }
     },
     {
-        "Method": "read",
-        "url": "http://127.0.0.1:8000/posts",
+        "Method": "get",
+        "url": "http://127.0.0.1:8000/posts/1",
         "data": {
-            "id": 1
         }
     },
     {
-        "Method": "create",
+        "Method": "post",
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "second testcase",
@@ -25,29 +24,27 @@
         }
     },
     {
-        "Method": "create",
+        "Method": "post",
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "third testcase",
-            "text": "hello hello hello world",
+            "text": "커피는 카페인 성분이 졸음을 유발하는 아데노신 수용체를 막아줘서 정신을 맑게 하고 집중력과 기억력을 높여주는 데다가 신진대사를 촉진하고 운동 능력을 향상시켜 체지방 연소와 다이어트에도 도움을 줍니다. 게다가 폴리페놀이나 클로로겐산 같은 항산화 물질이 풍부해서 세포 노화를 막고 만성 염증을 줄여주며 regular하게 마시면 제2형 당뇨병이나 지방간, 간경변 같은 간 질환, 그리고 알츠하이머나 파킨슨병 같은 퇴행성 뇌 질환의 발병 위험을 낮춰준다는 장점이 있습니다. 다만 이 모든 건 시럽이나 크림이 없는 블랙커피 기준이고 너무 많이 마시면 잠이 안 오거나 심장이 뛸 수 있으니 하루 3잔 이내로 적당히 드시는 게 좋습니다.",
             "author": "kevin"
         }
     },
     {
-        "Method": "update",
-        "url": "http://127.0.0.1:8000/posts",
+        "Method": "patch",
+        "url": "http://127.0.0.1:8000/posts/1",
         "data": {
-            "id": 1,
             "title": "This post is modified",
-            "text": "Modified",
+            "text": "Hello, my name is wiggle, Nice to see you. Have a good day!",
             "author": "wiggle"
         }
     },
     {
-        "Method": "update",
-        "url": "http://127.0.0.1:8000/posts",
+        "Method": "patch",
+        "url": "http://127.0.0.1:8000/posts/1",
         "data": {
-            "id": 1,
             "title": "Invalid Update",
             "text": "nono",
             "author": "alex"
@@ -55,78 +52,79 @@
     },
     {
         "Method": "delete",
-        "url": "http://127.0.0.1:8000/posts",
+        "url": "http://127.0.0.1:8000/posts/1",
         "data": {
-            "id": 1,
             "author": "alex"
         }
     },
     {
         "Method": "delete",
-        "url": "http://127.0.0.1:8000/posts",
+        "url": "http://127.0.0.1:8000/posts/2",
         "data": {
-            "id": 2,
             "author": "alex"
         }
     },
     {
-        "Method": "create",
-        "url": "http://127.0.0.1:8000/comments",
+        "Method": "post",
+        "url": "http://127.0.0.1:8000/posts/1/comments",
         "data": {
-            "post_id": 1,
             "author": "alex",
             "text": "first comment"
         }
     },
     {
-        "Method": "read",
-        "url": "http://127.0.0.1:8000/posts",
+        "Method": "get",
+        "url": "http://127.0.0.1:8000/posts/1",
         "data": {
-            "id": 1
         }
     },
     {
-        "Method": "update",
-        "url": "http://127.0.0.1:8000/comments",
+        "Method": "patch",
+        "url": "http://127.0.0.1:8000/comments/1",
         "data": {
-            "id": 1,
             "text": "modified comment",
             "author": "alex"
         }
     },
     {
-        "Method": "update",
-        "url": "http://127.0.0.1:8000/comments",
+        "Method": "patch",
+        "url": "http://127.0.0.1:8000/comments/1",
         "data": {
-            "id": 1,
             "text": "should be 403",
             "author": "wiggle"
         }
     },
     {
-        "Method": "create",
-        "url": "http://127.0.0.1:8000/comments",
+        "Method": "post",
+        "url": "http://127.0.0.1:8000/posts/3/comments",
         "data": {
-            "post_id": 3,
             "author": "wiggle",
             "text": "second comment"
         }
     },
     {
         "Method": "delete",
-        "url": "http://127.0.0.1:8000/comments",
+        "url": "http://127.0.0.1:8000/comments/3",
         "data": {
-            "id": 3,
             "author": "wiggle"
         }
     },
     {
-        "Method": "create",
-        "url": "http://127.0.0.1:8000/comments",
+        "Method": "post",
+        "url": "http://127.0.0.1:8000/posts/2/comments",
         "data": {
-            "post_id": 2,
             "author": "alex",
-            "text": "first comment"
+            "text": "ㅣlast comment"
         }
+    },
+    {
+        "Method": "get",
+        "url": "http://127.0.0.1:8000/posts/1/translation/korean",
+        "data": {}
+    },
+    {
+        "Method": "get",
+        "url": "http://127.0.0.1:8000/posts/3/summarization",
+        "data": {}
     }
 ]
