@@ -12,21 +12,22 @@ def load_test_cases(file_path: os.PathLike):
 
 def main():
     test_cases = load_test_cases(TEST_CASES_PATH)
-    for tc in test_cases:
+    for i, tc in enumerate(test_cases):
+        print(f"Case [{i+1}/{len(test_cases)}]")
         match tc['Method']:
-            case "create":
+            case "post":
                 rq = requests.post(url=tc['url'], json=tc['data'])
-            case "update":
+            case "patch":
                 rq = requests.patch(url=tc['url'], json=tc['data'])
             case "delete":
                 rq = requests.delete(url=tc['url'], json=tc['data'])
-            case "read":
+            case "get":
                 rq = requests.get(url=tc['url'], json=tc['data'])
             case _:
                 continue
 
        
-        print(rq, rq.content)
+        print(rq, rq.content.decode('utf-8'))
         print()
     return
 

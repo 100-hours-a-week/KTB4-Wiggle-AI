@@ -45,14 +45,14 @@ def create_post_db(db: Session, post: schemas.PostBase) -> Post:
     db.refresh(db_post)
     return db_post
 
-def read_post_db(db: Session, post: schemas.PostRead) -> Post:
-    check_post_existence(db, post.id)
-    db_post = db.query(Post).filter(Post.id==post.id).options(selectinload(Post.comment)).first()
+def read_post_db(db: Session, post_id: int) -> Post:
+    check_post_existence(db, post_id)
+    db_post = db.query(Post).filter(Post.id==post_id).options(selectinload(Post.comment)).first()
     return db_post
 
-def update_post_db(db: Session, post: schemas.PostUpdate) -> Post:
-    check_post_existence(db, post.id)
-    db_post = db.query(Post).filter(Post.id == post.id).first()
+def update_post_db(db: Session, post_id: int, post: schemas.PostUpdate) -> Post:
+    check_post_existence(db, post_id)
+    db_post = db.query(Post).filter(Post.id == post_id).first()
     check_author_identity(post.author, db_post.author)
     db_post.title = post.title
     db_post.text = post.text
@@ -61,21 +61,19 @@ def update_post_db(db: Session, post: schemas.PostUpdate) -> Post:
     db.refresh(db_post)
     return db_post
 
-def delete_post_db(db: Session, post: schemas.PostDelete) -> None:
-    check_post_existence(db, post.id)
-    db_post = db.query(Post).filter(Post.id==post.id).first()
+def delete_post_db(db: Session, post_id: int, post: schemas.PostDelete) -> None:
+    check_post_existence(db, post_id)
+    db_post = db.query(Post).filter(Post.id==post_id).first()
     check_author_identity(post.author, db_post.author)
     db.delete(db_post)
     db.commit()
     return True
 
-
-
 # Comment
-def create_comment_db(db: Session, comment: schemas.CommentBase) -> Comment:
-    check_post_existence(db, comment.post_id)
+def create_comment_db(db: Session, post_id:int, comment: schemas.CommentBase) -> Comment:
+    check_post_existence(db, post_id)
     db_comment = Comment(
-        post_id = comment.post_id,
+        post_id = post_id,
         text = comment.text,
         author = comment.author,
         upload_time = datetime.now()
@@ -85,14 +83,14 @@ def create_comment_db(db: Session, comment: schemas.CommentBase) -> Comment:
     db.refresh(db_comment)
     return db_comment
 
-def read_comment_db(db: Session, comment: schemas.CommentRead):
-    db_comment = db.query(Comment).filter(Comment.id==comment.id).first()
-    check_comment_existence(db, comment.id)
+def read_comment_db(db: Session, comment_id: int):
+    check_comment_existence(db, comment_id)
+    db_comment = db.query(Comment).filter(Comment.id==comment_id).first()
     return db_comment
 
-def update_comment_db(db: Session, comment: schemas.CommentUpdate) -> Comment:
-    check_comment_existence(db, comment.id)
-    db_comment = db.query(Comment).filter(Comment.id == comment.id).first()
+def update_comment_db(db: Session, comment_id: int, comment: schemas.CommentUpdate) -> Comment:
+    check_comment_existence(db, comment_id)
+    db_comment = db.query(Comment).filter(Comment.id == comment_id).first()
     check_author_identity(comment.author, db_comment.author)
     db_comment.text = comment.text
     
@@ -100,9 +98,9 @@ def update_comment_db(db: Session, comment: schemas.CommentUpdate) -> Comment:
     db.refresh(db_comment)
     return db_comment
     
-def delete_comment_db(db: Session, comment: schemas.CommentDelete) -> Comment:
-    check_comment_existence(db, comment.id)
-    db_comment = db.query(Comment).filter(Comment.id == comment.id).first()
+def delete_comment_db(db: Session, comment_id:int, comment: schemas.CommentDelete) -> Comment:
+    check_comment_existence(db, comment_id)
+    db_comment = db.query(Comment).filter(Comment.id == comment_id).first()
     check_author_identity(comment.author, db_comment.author)
     db.delete(db_comment)
     db.commit()
