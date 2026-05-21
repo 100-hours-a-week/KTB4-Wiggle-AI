@@ -1,6 +1,7 @@
 [
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "first testcase",
@@ -10,12 +11,14 @@
     },
     {
         "Method": "get",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1",
         "data": {
         }
     },
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "second testcase",
@@ -25,6 +28,7 @@
     },
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts",
         "data": {
             "title": "third testcase",
@@ -34,6 +38,7 @@
     },
     {
         "Method": "patch",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1",
         "data": {
             "title": "This post is modified",
@@ -43,6 +48,7 @@
     },
     {
         "Method": "patch",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1",
         "data": {
             "title": "Invalid Update",
@@ -52,6 +58,7 @@
     },
     {
         "Method": "delete",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1",
         "data": {
             "author": "alex"
@@ -66,6 +73,7 @@
     },
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1/comments",
         "data": {
             "author": "alex",
@@ -74,12 +82,14 @@
     },
     {
         "Method": "get",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/1",
         "data": {
         }
     },
     {
         "Method": "patch",
+        "stream": false,
         "url": "http://127.0.0.1:8000/comments/1",
         "data": {
             "text": "modified comment",
@@ -88,6 +98,7 @@
     },
     {
         "Method": "patch",
+        "stream": false,
         "url": "http://127.0.0.1:8000/comments/1",
         "data": {
             "text": "should be 403",
@@ -96,6 +107,7 @@
     },
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/3/comments",
         "data": {
             "author": "wiggle",
@@ -104,6 +116,7 @@
     },
     {
         "Method": "delete",
+        "stream": false,
         "url": "http://127.0.0.1:8000/comments/3",
         "data": {
             "author": "wiggle"
@@ -111,20 +124,12 @@
     },
     {
         "Method": "post",
+        "stream": false,
         "url": "http://127.0.0.1:8000/posts/2/comments",
         "data": {
             "author": "alex",
             "text": "ㅣlast comment"
         }
-    },
-    {
-        "Method": "get",
-        "url": "http://127.0.0.1:8000/posts/1/translation/korean",
-        "data": {}
-    },
-    {
-        "Method": "get",
-        "url": "http://127.0.0.1:8000/posts/3/summarization",
-        "data": {}
     }
+    
 ]

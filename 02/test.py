@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import asyncio
 
 TEST_CASES_PATH = "./test_cases.json"
 
@@ -23,6 +24,7 @@ def main():
                 rq = requests.delete(url=tc['url'], json=tc['data'])
             case "get":
                 rq = requests.get(url=tc['url'], json=tc['data'])
+                
             case _:
                 continue
 
