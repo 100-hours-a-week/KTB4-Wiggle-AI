@@ -1,5 +1,7 @@
+from typing import List
 from pydantic import BaseModel
 from datetime import datetime
+from schemas.comment import CommentResponse
 
 class PostCreate(BaseModel):
     title: str
@@ -19,4 +21,5 @@ class PostResponse(BaseModel):
     title: str
     text: str
     author: str
+    comment: List[CommentResponse]
     upload_time: datetime

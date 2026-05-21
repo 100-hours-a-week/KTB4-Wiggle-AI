@@ -1,3 +1,6 @@
 __pycache__/
 .venv/
 my_database.db
+.uv-cache
+.mode
+.python-version

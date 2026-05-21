@@ -8,6 +8,10 @@ from dependencies import PROMPT_YAML_PATH
 with open(PROMPT_YAML_PATH, 'r', encoding="utf-8") as f:
     prompts = yaml.safe_load(f)
 
+def format_sse_data(content: str):
+    safe_content = content.replace('\n', '\\n')
+    return f"data: {safe_content}\n\n"
+
 async def translate_stream_controller(client: httpx.AsyncClient,
                                 db: Session,
                                 post_id: int,
@@ -35,16 +39,19 @@ async def translate_stream_controller(client: httpx.AsyncClient,
     }
     headers = {"Content-Type": "application/json"}
 
-    async with client.stream("POST", url, json=payload, headers=headers) as response:
-        async for line in response.aiter_lines():
-            data = json.loads(line)
-
-            content = data.get('message', {}).get('content', {})
-            if content:
-                yield f"data: {content}\n\n"
-            
-            if data.get('done', False):
-                break
+    try:
+        async with client.stream("POST", url, json=payload, headers=headers) as response:
+            response.raise_for_status()
+            async for line in response.aiter_lines():
+                data = json.loads(line)
+                content = data.get('message', {}).get('content', {})
+                if content:
+                    yield format_sse_data(content)
+                
+                if data.get('done', False):
+                    break
+    except (httpx.HTTPError, json.JSONDecodeError) as exc:
+        yield format_sse_data(f"LLM error: {exc}")
     return
 
 async def summarize_stream_controller(client: httpx.AsyncClient, db: Session, post_id: int):
@@ -67,14 +74,17 @@ async def summarize_stream_controller(client: httpx.AsyncClient, db: Session, po
     }
     headers = {"Content-Type": "application/json"}
 
-    async with client.stream("POST", url, json=payload, headers=headers) as response:
-        async for line in response.aiter_lines():
-            data = json.loads(line)
-
-            content = data.get('message', {}).get('content', {})
-            if content:
-                yield f"data: {content}\n\n"
-            
-            if data.get('done', False):
-                break
+    try:
+        async with client.stream("POST", url, json=payload, headers=headers) as response:
+            response.raise_for_status()
+            async for line in response.aiter_lines():
+                data = json.loads(line)
+                content = data.get('message', {}).get('content', {})
+                if content:
+                    yield format_sse_data(content)
+                
+                if data.get('done', False):
+                    break
+    except (httpx.HTTPError, json.JSONDecodeError) as exc:
+        yield format_sse_data(f"LLM error: {exc}")
     return

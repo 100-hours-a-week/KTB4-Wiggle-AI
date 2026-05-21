@@ -12,6 +12,9 @@ def read_post_controller(db: Session, post_id: int):
     check_id_existence(db, PostModel, post_id)
     return PostModel.get_post_by_id(db, post_id)
 
+def read_post_list_controller(page_idx, db: Session):
+    return PostModel.read_post_list(page_idx, db)
+
 def update_post_controller(db: Session, post_id: int, post:PostUpdate):
     check_id_existence(db, PostModel, post_id)
     check_author_identity(db, PostModel, post_id, post.author)

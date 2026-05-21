@@ -4,6 +4,9 @@ from sqlalchemy.orm import relationship, Session
 from schemas.post import PostCreate, PostUpdate, PostDelete
 from datetime import datetime
 
+
+N_POST_PER_PAGE = 5
+
 class PostModel(Base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True, index=True)
@@ -43,8 +46,14 @@ class PostModel(Base):
         return db_post
 
     @classmethod
-    def get_post_by_id(cls, db:Session, post_id: int):
+    def get_post_by_id(cls, db: Session, post_id: int):
         return  db.query(cls).filter(cls.id==post_id).first()
+    
+    @classmethod
+    def read_post_list(cls, page_idx: int, db: Session):
+        if page_idx < 1:
+            page_idx = 1
+        return db.query(cls).offset((page_idx-1) * N_POST_PER_PAGE).limit(N_POST_PER_PAGE).all()
 
     @classmethod
     def update_post(cls, db: Session, post_id: int, post: PostUpdate):
