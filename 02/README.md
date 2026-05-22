@@ -13,6 +13,9 @@ uv sync
 ```bash
 uvicorn main:app
 ```
+```bash
+streamlit run streamlit_app.py
+```
 ---
 
 ## API Endpoints
