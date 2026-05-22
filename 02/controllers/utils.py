@@ -18,5 +18,11 @@ def check_author_identity(db: Session,
                           model_cls: Type[PostModel]|Type[CommentModel],
                           id: int,
                           author: str):
-      
-      return
+    origin_author = model_cls.get_author_by_id(db, id)  
+    print(type(origin_author), author)
+    if origin_author[0] != author:
+        entity_name = model_cls.__tablename__.capitalize()[:-1]
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"You can only edit/delete your own {entity_name}"
+        )
